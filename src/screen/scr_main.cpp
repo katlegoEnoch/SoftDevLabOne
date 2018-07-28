@@ -3,6 +3,23 @@
 //Date:      28 July 2018
 //Details:   Code uses Screen object to print letter K on 6by6 grid
 
+/*Uses of const identifier
+ const string& s -> s is reference to a string constant. In this case the memory address of the first element of a string is passed into a function and 
+  under normal circumstances the code would have ability to modify that string if they wished to. const declares the string as read-only and any attempts
+   to modify it would result in program crashing
+
+  void display() const -> display is a member function of the Screen class and const is used to declare it constant function meaning that it cannot modify
+  the state of any of its object's data member - unless that data member is declared as mutable.
+   
+    The const keyword is used again to declare all member functions that don't need to modify the state of the object's data member as constant functions.
+     * 
+ In the header file const string::size_type TOP_LEFT = 0 -> TOP_LEFT is defined as a string constant and its value cannot be modified either by the object's
+  own member functions or external functions
+   * 
+
+ at() member function returns a reference to the character at the specified location in the string. The at() carries out the same indexing operation as the 
+  [] operator defined for array but also includes range checking. In the Screen code it is used to assign a value to a specific element of the screen string.*/
+
 #include "screen.h"
 #include <iostream>
 
