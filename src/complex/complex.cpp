@@ -1,17 +1,21 @@
 // complex.cpp
+//Author:  Stax The Engipreneur
+//Date:    24 July 2018
 // Multiplying complex numbers
-
-//Answer++ does not work because the unary operator ++ is not defined for the complex type. The instruction has the same effect as adding a real quantity to a complex quantity which would result in an error
 
 #include <iostream>	// contains the definition of cout, endl
 #include <complex>	// contains the complex class definition
 
 using namespace std; // cout, endl, complex are all part of this namespace
 
+//simple to be used as substitute for complex<vector>
+using complexF = complex<float>;
+
 int main()
 {
-	auto num1 = complex<float>{2.0, 2.0};  // use auto for type deduction
-	auto num2 = complex<float>{4.0, -2.0}; // use uniform initialisation syntax (curly braces)
+    //we will replace complex<float> with simplex whenever we instantiate an object of complex type
+	auto num1 = complexF{2.0, 2.0};  // use auto for type deduction
+	auto num2 = complexF{4.0, -2.0}; // use uniform initialisation syntax (curly braces)
 
 	auto answer = num1 * num2; // type deduced for 'answer' is: complex<float>
 
