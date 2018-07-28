@@ -1,3 +1,8 @@
+//File_name: screen.cpp
+//Author:    Stax The Engipreneur
+//Date:      28 July 2018
+//Details:   move function overloaded
+
 #include "screen.h"
 
 // Screen's constructor
@@ -65,6 +70,43 @@ void Screen::move( string::size_type row, string::size_type col )
 	return;
 }
 
+/*my goal is to simply convert dir to an x,y coordinate and call the existing move function*/
+void Screen::move(Direction dir)
+{
+    //process dir to produce equivalent x,y coordinate
+    switch(dir){
+        //move cursor to 'home' position on grid
+        case Direction::HOME:
+            home();
+            break;
+        case Direction::FORWARD:
+            //forward movement only affects column
+            forward();
+            break;
+        case Direction::BACK:
+            //call existing back function
+            back();
+            break;
+        case Direction::UP:
+            //call existing up function
+            up();
+            break;
+        case Direction::DOWN:
+            //call existing down function
+            down();
+            break;
+        case Direction::END:
+            //call existing end function
+            end();
+            break;
+            //do nothing
+    }//end switch
+    
+    
+    //return control to calling function
+    return;
+}
+
 char Screen::get( string::size_type row, string::size_type col )
 {
 	// position cursor_
@@ -85,7 +127,8 @@ void Screen::set( char ch )
 void Screen::set( const string& s )
 {   // write string beginning at current cursor_ position
 	auto space = remainingSpace();
-	auto len = s.size();
+	auto len = s.size();//how long is the string?
+    //if the string length is longer than remaining space...
 	if ( space < len ) {
 		cerr << "Screen::set - Truncating, "
 			<< "space available: " << space
@@ -95,6 +138,7 @@ void Screen::set( const string& s )
 	}
 
 	_screen.replace( cursor_, len, s );
+    //update cursor
 	cursor_ += len - 1;
 
 	return;
@@ -104,6 +148,7 @@ void Screen::clear( char bkground )
 {   // reset the cursor and clear the screen
 	cursor_ = TOP_LEFT;
 	// assign the string
+    //there are different assign functions within the string class, one variation takes length and character as arg
 	_screen.assign(
 		// with size() characters
 		_screen.size(),
@@ -117,6 +162,7 @@ void Screen::clear( char bkground )
 void Screen::reSize( string::size_type h, string::size_type w, char bkground )
 {   // can only *increase* a screen's size to height h and width w
 	// remember the content of the screen
+    //using one string to initialize another
 	string local{_screen};
 	auto local_pos = TOP_LEFT;
 
@@ -175,4 +221,5 @@ string::size_type Screen::row() const
 {   // return current row
 	return (cursor_ + width_)/width_;
 }
+
 

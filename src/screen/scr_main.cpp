@@ -1,25 +1,14 @@
 //File_name: scr_main.cpp
 //Author:    Stax The Engipreneur
-//Date:      28 July 2018
-//Details:   Code uses Screen object to print letter K on 6by6 grid
+//Date:      25 July 2018
+//Details:   Testing functionality of overloaded move function
 
-/*Uses of const identifier
- const string& s -> s is reference to a string constant. In this case the memory address of the first element of a string is passed into a function and 
-  under normal circumstances the code would have ability to modify that string if they wished to. const declares the string as read-only and any attempts
-   to modify it would result in program crashing
+/*This function is not adding a new feature to the Screen class. It doesn't provide its clients with an extra feature.
+ * The client is able to command the object to move forward,home, end etc using the existing member functions. This, therefore,
+ renders this function unnecessary as it doesn't add any new feature to the class. */
 
-  void display() const -> display is a member function of the Screen class and const is used to declare it constant function meaning that it cannot modify
-  the state of any of its object's data member - unless that data member is declared as mutable.
-   
-    The const keyword is used again to declare all member functions that don't need to modify the state of the object's data member as constant functions.
-     * 
- In the header file const string::size_type TOP_LEFT = 0 -> TOP_LEFT is defined as a string constant and its value cannot be modified either by the object's
-  own member functions or external functions
-   * 
 
- at() member function returns a reference to the character at the specified location in the string. The at() carries out the same indexing operation as the 
-  [] operator defined for array but also includes range checking. In the Screen code it is used to assign a value to a specific element of the screen string.*/
-
+// Exercising the Screen class
 #include "screen.h"
 #include <iostream>
 
@@ -36,7 +25,7 @@ int main()
         //write * at current location
         //staxScreen.set('*');
         //move cursor to next row
-        staxScreen.down();
+        staxScreen.move(Direction::DOWN);
         //write * at current location
         staxScreen.set('*');
     }//end of part1
@@ -47,8 +36,8 @@ int main()
     
     //move cursor forward and down and place * there
     for(int i = 0; i < 2;i++){
-        staxScreen.forward();
-        staxScreen.down();
+        staxScreen.move(Direction::FORWARD);
+        staxScreen.move(Direction::DOWN);
         staxScreen.set('*');
     }//end of part 2
     
@@ -57,8 +46,8 @@ int main()
     
     //move cursor forward and up and place * there
     for(int i = 0; i < 2;i++){
-        staxScreen.forward();
-        staxScreen.up();
+        staxScreen.move(Direction::FORWARD);
+        staxScreen.move(Direction::UP);
         staxScreen.set('*');
     }//end of part 2
     
@@ -70,4 +59,5 @@ int main()
     //indicate that main terminated successfully
     return 0;
 }
+
 
