@@ -3,14 +3,17 @@
 //Date:      26 July 2018
 //Details:   Testing functionality of square drawing functionalities
 
-/*It is entirely possible to implement the drawing function without knowledge of the implementation details of the class's member functions. The interface
-provides sufficient information to build this function without knowing how the actual functions are implemented. In doing its task the function makes use
-of some of the class's member functions and these functions are used by calling them and supplying arguments specified in the interface.
+/*The screen string is better internally represented as a two dimensional array or vector. This would eliminate the need
+ * of having to constantly convert between a 2D screen and a 1D screen storage object in performing the various tasks associtated with the screen class.
+ * The interface could remain as it is but the screen could be represented INTERNALLY as a two dimensional vector.
+ * 
+ * It is important to avoid making changes to the interface because client code - like the one we created in these exercise - is written based on the interface. Changing
+ * the interface would cause the client code to breakdown due to those changes and will require client code to be re-written to adapt to the interface changes.
+ * 
+ * We are free to make changes to the implementation because, unlike the interface, client code is not written based on the interface. Implementation code could change
+ * but if the interface is not modified client code will not have to change*/
 
-The screen class was originally intended as a storage and display class for text characters. Thus in keeping with the principle of limiting a single class's 
- * responsibility this function would perhaps be better defined in a seperate class that is responsible for drawing shapes on the screen. The screen's responsibilities
- * should be limited to managing its internal components - cursor, dimensions and background. Another reason is that a class that takes on too many tasks is 
- * challenging to debug and maintain.*/
+
 
 // Exercising the Screen class
 #include "screen.h"
