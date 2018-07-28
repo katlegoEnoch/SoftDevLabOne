@@ -1,8 +1,3 @@
-//File_name: screen.cpp
-//Author:    Stax The Engipreneur
-//Date:      28 July 2018
-//Details:   move function overloaded
-
 #include "screen.h"
 
 // Screen's constructor
@@ -37,9 +32,17 @@ void Screen::back()
 
 void Screen::up()
 {   // move cursor_ up one row of screen
-	// do not wrap around
-	if ( row() == 1 ) // at top?
-		cerr << "Screen::up - Cannot wrap around in a vertical direction" << endl;
+	
+	if ( row() == 1 ){ // at top?
+        if(cursor_ < (height_- 1)){
+            //wrap to bottom row, next column
+            cursor_ += (height_-1)*width_ + 1;
+        }//end if
+        else if(cursor_ == (width_-1)){
+            //move cursor to opposite corner
+            cursor_ = (height_-1)*width_;
+        }//end else
+    }
 	else
 		cursor_ -= width_;
 
@@ -48,9 +51,13 @@ void Screen::up()
 
 void Screen::down()
 {   // move cursor_ down one row of screen
-	// do not wrap around
-	if ( row() == height_ ) // at bottom?
-		cerr << "Screen::down - Cannot wrap around in a vertical direction" << endl;
+	if ( row() == height_ ){
+        if(cursor_ != (height_*width_-1)){
+            cursor_ = cursor_ - ((height_-1)*width_)+ 1;
+        }//end inner if
+        else
+            cursor_ = 0;
+    }//end if
 	else
 		cursor_ += width_;
 
@@ -221,5 +228,6 @@ string::size_type Screen::row() const
 {   // return current row
 	return (cursor_ + width_)/width_;
 }
+
 
 

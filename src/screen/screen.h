@@ -1,3 +1,8 @@
+//File_name: screen.h
+//Author:    Stax The Engipreneur
+//Date:      25 July 2018
+//Details:   move function overloaded to a direction argument as opposed to a coordinate
+
 #ifndef SCREEN_H
 #define SCREEN_H
 
@@ -12,9 +17,23 @@ using namespace std;
 // *size* of any string that can be held by the string class as well as any index into
 // the string.
 
+//strongly-typed Enum
+enum class Direction
+{
+    HOME,
+    FORWARD,
+    BACK,
+    UP,
+    DOWN,
+    END
+};
+    
+
+
 class Screen {
 public:
 	// Screen's constructor
+    //if arguments are not specified, defaults are used. By default the screen is 40 by 8 and hae # background
 	Screen( string::size_type height = 40, string::size_type width = 8, char bkground = '#');
 
 	// get the Screen's height
@@ -36,6 +55,9 @@ public:
 	void down();
 	// move the cursor to the specified row and column
 	void move(string::size_type row, string::size_type col);
+    
+    //function overloading
+    void move(Direction);
 
 	// get the character at the cursor's current position
 	char get() const { return _screen[cursor_]; }
