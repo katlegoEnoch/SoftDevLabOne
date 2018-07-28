@@ -1,6 +1,8 @@
 // complex.cpp
 // Multiplying complex numbers
 
+//Answer++ does not work because the unary operator ++ is not defined for the complex type. The instruction has the same effect as adding a real quantity to a complex quantity which would result in an error
+
 #include <iostream>	// contains the definition of cout, endl
 #include <complex>	// contains the complex class definition
 
