@@ -1,7 +1,7 @@
 //File_name: screen.h
 //Author:    Stax The Engipreneur
-//Date:      25 July 2018
-//Details:   move function overloaded to a direction argument as opposed to a coordinate
+//Date:      26 July 2018
+//Details:   Screen class now provides user ability to draw empty squares on the screen
 
 #ifndef SCREEN_H
 #define SCREEN_H
@@ -20,11 +20,12 @@ using namespace std;
 //strongly-typed Enum
 enum class Direction
 {
-    HOME,
+    //to ensure clockwise movement of draw function..
     FORWARD,
     BACK,
     UP,
     DOWN,
+    HOME,
     END
 };
     
@@ -77,6 +78,19 @@ public:
 	void display() const;
 	// check whether the specified co-ordinates lie within the screen
 	bool checkRange(string::size_type row, string::size_type col) const;
+    
+    //square drawing functionality
+    //function that draws a square on the screen and displays it
+    void drawSquare(string::size_type,string::size_type, string::size_type);
+    
+    //private helper functions
+private:
+
+    //function prototypes for Screen functions to be added on
+    bool squareValid(string::size_type,string::size_type,string::size_type);
+
+    //function draws a line of particular length
+    void drawSide(string::size_type,int);
 
 private:
 	// constants

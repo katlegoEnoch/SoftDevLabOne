@@ -1,3 +1,8 @@
+//File_name: Screen.h
+//Author:    Stax The Engipreneur
+//Date:      26 July 2018
+//Details:   Square drawing functions added to class
+
 #include "screen.h"
 
 // Screen's constructor
@@ -197,6 +202,8 @@ void Screen::reSize( string::size_type h, string::size_type w, char bkground )
 
 void Screen::display() const
 {
+    cout << endl;
+    
 	for ( string::size_type ix = 0; ix < height_; ++ix )
 	{ // for each row
 		string::size_type offset = width_ * ix; // row position
@@ -229,5 +236,69 @@ string::size_type Screen::row() const
 	return (cursor_ + width_)/width_;
 }
 
+void Screen::drawSquare(string::size_type x,string::size_type y,string::size_type length)
+{
+    
+    //check the square position and dimensions for validity i.e. will square fit?
+    if(squareValid(x,y,length)){
+        //move cursor to required position
+        move(x,y);
+        //run through enum list to draw clockwise
+        for(int sideCount = 0; sideCount < 4;sideCount++){
+            //draw line of length in given direction
+            drawSide(length,sideCount);
+        }//end for loop
+    }//end if
+    else
+        cout << "\nSquare out of bounds!\n";
+        
+    //display user request - square on screen
+    display();
+    
+    //return control to calling function
+    return;
+}
 
+//private helper functions
+//implementation of error checking function
+bool Screen::squareValid(string::size_type x,string::size_type y,string::size_type length)
+{
+    //compare square coordinate and length with screen dimensions
+    if((length <= (width_ - x)+1) && (length <= (height_ - y)+1))
+        return true;
+    else
+        return false;
+    
+    //return control to calling function
+}
+
+//function draw side of square
+void Screen::drawSide(string::size_type length,int side)
+{
+    //print stars of length in given direction
+    for(string::size_type star = 1;star < length; star++){
+        
+        //move cursor in given direction
+        switch(side){
+            case 0:
+                move(Direction::FORWARD);
+                break;
+            case 1:
+                move(Direction::DOWN);
+                break;
+            case 2:
+                move(Direction::BACK);
+                break;
+            case 3:
+                move(Direction::UP);
+                break;    
+        }//end switch
+        //print star
+        set('*');
+    }//end for loop
+
+    
+    //return control to calling function
+    return;
+}
 
